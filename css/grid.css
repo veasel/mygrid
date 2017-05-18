@@ -1,0 +1,34 @@
+.mygrid{
+	border-collapse: collapse;
+}
+.mygrid tbody tr:nth-child(odd){
+  background: #f9f9f9;
+}
+
+.mygrid td,.mygrid th{
+  padding:8px;
+  text-align: center;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #333;
+  font-size: 14px;
+  border:1px solid #eee;
+ 
+}
+.mygrid th{
+  font-weight:500;
+}
+.mygrid tr{
+  border:1px solid #eee;
+  
+}
+.mygrid tbody tr:hover{
+  background: #08f
+}
+.mygrid tbody tr.active{
+  background: #08f
+}
+
+

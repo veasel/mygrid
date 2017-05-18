@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/grid.js"></script>
+	<link rel="stylesheet" href="css/grid.css">
+</head>
+<body>
+	<div></div>
+</body>
+<script>
+	var url="json.txt";
+
+	$.getJSON(url,function(result){	
+		gridTab(result);					
+	})
+
+	function gridTab(data){
+		$("div").grid({
+			thead:[
+					{name: "姓名",key:"CPatientName",visible: true}
+					,{name: "性别",key:"patientSex",visible: true}
+					,{name: "年龄",key:"patientAge",visible: true}
+					,{name: "检查部位",key:"examinePart",visible: true}
+					,{name: "检查方法",key:"examineMethod",visible: true}
+					,{name: "单位",key:"hospitalName",visible: true}
+					,{name: "申请时间",key:"requestDate",visible: true}
+					,{name: "patientId",key:"patientId",visible: false}// 	
+					,{name: "studyId",key:"studyInstanceUid",visible: false}
+					,{name: "status",key:"status",visible: false}
+					,{name: "requestId",key:"requestId",visible: false}
+					,{name: "申请医生",key:"SRPDoctor",visible: true}
+					,{name: "联系电话",key:"PatMobile",visible: true}		
+					,{name: "会诊目的",key:"requestPurpose",visible: true}
+				],
+			serialnum:true,
+			data:data
+		})
+	}
+	
+</script>
+</html>

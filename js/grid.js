@@ -7,7 +7,7 @@
 
 // 		thead:[{name: "姓名",    //name 为表头对应的名称
 // 				key:"CPatientName", //key为data数据中的对应的属性名
-// 				visible: true  //内容是否可见，默认true为可见
+// 				hidden: false  //内容是否可见，默认false为可见
 //				width: 30     //宽度为数字，不设置为默认
 //            }]	,
 // 		data: arr, //数据源
@@ -24,7 +24,7 @@
 			serialnum:true,
 			data:null
 		};
-		this.options=$.extend({},this._options,settings);
+		this.options=this.checkArgument(settings);
 	}
 
 
@@ -33,12 +33,23 @@
 
 		renderHead:function(){
 			var self=this;
-			var html="<table class=mygrid><thead><tr><th></th>";	
+			var html="<table class=mygrid><thead><tr><th style=width:20px></th>";	
 			var data=self.options.thead;
 			$.each(data,function(i,ele){
 				html+="<th "+self.headStyle(ele)+">"+ele.name+"</th>";
 			})
 			return html+"</tr></thead>";
+		},
+
+		checkArgument:function(settings){
+			var flag=(typeof settings)=="string";
+			if(flag){
+
+
+			}else{
+				return $.extend({},this._options,settings);
+			}
+
 		},
 
 		renderBody:function(options){ //加载tbody数据
@@ -67,7 +78,7 @@
 			var eStyle="";
 
 			if(ele.width){
-				eStyle+=+"width:"+ele.width+";";
+				eStyle+="width:"+ele.width+"px;";
 			}
 			return eStyle? "style="+eStyle: "";
 		},
@@ -76,7 +87,7 @@
 			var datas=self.options.thead;
 			for(var i=0;i<datas.length;i++){
 				var td=datas[i];
-				if(!td.visible){ //如果false,默认为true
+				if(td.hidden){ //如果false或undefined,默认为true不可见
 					self.ele.find("tr").each(function(){
 						$(this).children().eq(i+1).hide();
 					})
@@ -89,9 +100,11 @@
 			var self=this;
 			var html;
 			var options=self.options;
-			html=self.renderHead()+self.renderBody(options);
-			self.ele.append(html);
-			self.visible();
+			if(options.data){
+				html=self.renderHead()+self.renderBody(options);
+				self.ele.empty().append(html);
+				self.visible();
+			}
 		}	
 	}
 	

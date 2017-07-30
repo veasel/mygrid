@@ -70,7 +70,7 @@
 			var serialnum=this.options.serialnum;
 			if(!serialnum){
 				self.ele.find("tr").each(function(){
-					$(this).children().eq(0).hide();
+					this.firstElementChlid.style.display="hidden";
 				})
 			}
 		},
@@ -89,7 +89,7 @@
 				var td=datas[i];
 				if(td.hidden){ //如果false或undefined,默认为true不可见
 					self.ele.find("tr").each(function(){
-						$(this).children().eq(i+1).hide();
+						self.children[i+1].style.display="none";
 					})
 				}
 			}		
